@@ -13,7 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: MyProject());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Enterprise PageView Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyProject(),
+    );
   }
 }
 
@@ -39,9 +47,10 @@ class _MyProjectState extends State<MyProject> {
   @override
   void initState() {
     super.initState();
+
     pages = [
       ListPage(storageKey: keyList),
-      PageViewPage(storageKey: keyPageView),
+      EnterprisePageViewWidget(storageKey: keyPageView),
       ExpansionPage(storageKey: keyExpansion),
     ];
   }
@@ -50,19 +59,22 @@ class _MyProjectState extends State<MyProject> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Design Tools'),
-        backgroundColor: Colors.blue,
+        title: const Text('Enterprise Design Tools'),
+        backgroundColor: const Color(0xFF1A237E),
         foregroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: IndexedStack(index: bottomIndex, children: pages),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: bottomIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: const Color(0xFF1A237E),
+        unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Lists'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pageview),
+            icon: Icon(Icons.view_carousel),
             label: 'PageView',
           ),
           BottomNavigationBarItem(
